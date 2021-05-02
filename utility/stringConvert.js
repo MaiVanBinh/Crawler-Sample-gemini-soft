@@ -1,13 +1,12 @@
 /**
  * @param s string 'hh:mm:ss'
  */
-exports.StringToMin = (s) => {
+exports.StringToSecond = (s) => {
     let arr = s.split(':').map(e => parseInt(e));
-    let number = arr[0]*60 + arr[1] + Math.ceil(arr[2]/60);
+    let number = arr[0]*3600 + arr[1]*60 + arr[2];
     return number;
 }
 
 exports.stringToDate = (s) => {
-    console.log(s);
     return (new Date(parseInt(s))).toISOString();
 }

@@ -1,18 +1,11 @@
-const crawlerServices = require("../services/crawler");
+const crawlerServices = require("../services/crawlerPodbbang");
 const { respWithData } = require("../utility/resCustom");
 const crawlerAudioClipServices = require('../services/crawlerAudioclip');
 
 exports.getPodBbang = async (req, res, next) => {
   try {
-    let offset = 0;
-    const category = parseInt(req.params.id);
-    while (true) {
-      const data = await crawlerServices.getProgram(offset, category);
-      offset = offset + 1;
-      if (!data) {
-        break;
-      }
-    }
+    await crawlerServices.getCategories();
+    await crawlerServices.getPrograms();
     return res.status(200).json(
       respWithData(200, {
         message: "Create success",
@@ -29,11 +22,11 @@ exports.getPodBbang = async (req, res, next) => {
 
 exports.getAutoClip = async (req, res, next) => {
     try {
-        const category = parseInt(req.params.id);
-        await crawlerAudioClipServices.getProgram(category);
+        await crawlerAudioClipServices.getCategories();
+        await crawlerAudioClipServices.getProgram();
         return res.status(200).json(
           respWithData(200, {
-            message: "Create success",
+            message: "Crawler Success"
           })
         );
       } catch (err) {

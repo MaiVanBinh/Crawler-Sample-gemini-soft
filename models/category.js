@@ -11,12 +11,12 @@ const categorySchema = new Schema(
       type: String,
       required: true
     },
-    web_id: {
+    origin_id: {
       type: Number,
       required: true
     },
   },
-  { timestamps: true }
+  { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );
 
 module.exports = mongoose.model("Category", categorySchema);
